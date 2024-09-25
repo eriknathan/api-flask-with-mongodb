@@ -1,0 +1,19 @@
+---
+services:
+  mongodb:
+    image: mongo:8.0.0
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+  api:
+    build: .
+    container_name: api-flask
+    ports:
+      - 5000:5000
+    restart: always
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
